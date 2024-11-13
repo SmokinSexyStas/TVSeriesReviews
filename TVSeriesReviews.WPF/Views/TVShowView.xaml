@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="TVSeriesReviews.WPF.Views.TVShowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TVSeriesReviews.WPF.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TVSeriesReviews.WPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Button Content="Home" Command="{Binding NavigateHomeCommand}" Width="50" HorizontalAlignment="Left"/>
+        <TextBlock Text="{Binding TVShow.Title}" FontSize="20" FontWeight="Bold"/>
+        <TextBlock>
+            <Run Text="Rate "/>
+            <Run Text="{Binding TVShow.Rate, Mode=OneWay}"/>
+        </TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Directed by " />
+            <TextBlock Text="{Binding Directors}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Genres: " />
+            <TextBlock Text="{Binding Genres}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Actors: " />
+            <TextBlock Text="{Binding Actors}" />
+        </StackPanel>
+        <TextBlock Text="Description" Margin="0,10,0,0"/>
+        <TextBlock Text="{Binding TVShow.Description}"/>
+    </StackPanel>
+</UserControl>
