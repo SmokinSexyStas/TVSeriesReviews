@@ -24,7 +24,14 @@ namespace TVSeriesReviews.WPF.Views
         public ErrorView()
         {
             InitializeComponent();
-            DataContext = new ErrorViewModel();
+        }
+
+        internal ErrorViewModel ErrorViewModel
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }

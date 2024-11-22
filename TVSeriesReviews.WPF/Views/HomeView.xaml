@@ -7,11 +7,7 @@
              xmlns:vm="clr-namespace:TVSeriesReviews.WPF.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <vm:HomeViewModel />
-    </UserControl.DataContext>
     <StackPanel>
-        <Button Content="Authorization" Command="{Binding NavigateAuthorizationCommand}" Width="90" HorizontalAlignment="Right"/>
         <ListBox ItemsSource="{Binding TVShows}" 
                  SelectedItem="{Binding SelectedTVShow, Mode=TwoWay}">
             <ListBox.ItemTemplate>

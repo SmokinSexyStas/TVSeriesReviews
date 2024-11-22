@@ -1,8 +1,11 @@
-﻿<Application x:Class="TVSeriesReviews.WPF.App"
+﻿<prism:PrismApplication x:Class="TVSeriesReviews.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:vm="clr-namespace:TVSeriesReviews.WPF.ViewModels"
+             xmlns:v="clr-namespace:TVSeriesReviews.WPF.Views"
              xmlns:local="clr-namespace:TVSeriesReviews.WPF">
     <Application.Resources>
-         
+        
     </Application.Resources>
-</Application>
+</prism:PrismApplication>

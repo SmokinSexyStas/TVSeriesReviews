@@ -11,34 +11,5 @@ namespace TVSeriesReviews.WPF.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public ICommand NavigateHomeCommand { get; set; }
-        public ICommand NavigateErrorCommand { get; set; }
-        public ICommand NavigateAuthorizationCommand { get; set; }
-
-        public ViewModelBase()
-        {
-            NavigateHomeCommand = new RelayCommand(NavigateHome);
-            NavigateErrorCommand = new RelayCommand(ShowError);
-            NavigateAuthorizationCommand = new RelayCommand(NavigateAuthorization);
-        }
-
-        protected void NavigateHome()
-        {
-            var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-            mainViewModel?.NavigateHome();
-        }
-
-        protected void ShowError()
-        {
-            var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-            mainViewModel?.NavigateError();
-        }
-
-        protected void NavigateAuthorization()
-        {
-            var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-            mainViewModel?.NavigateAuthorization();
-        }
     }
 }

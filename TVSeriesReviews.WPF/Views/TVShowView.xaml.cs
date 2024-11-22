@@ -22,10 +22,17 @@ namespace TVSeriesReviews.WPF.Views
     /// </summary>
     public partial class TVShowView : UserControl
     {
-        public TVShowView(TVShow selectedShow)
+        public TVShowView()
         {
             InitializeComponent();
-            DataContext = new TVShowViewModel(selectedShow);
+        }
+
+        public TVShowViewModel TVShowViewModel
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }

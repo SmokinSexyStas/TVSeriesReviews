@@ -12,21 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TVSeriesReviews.WPF.ViewModels;
 
 namespace TVSeriesReviews.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for HeaderView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class HeaderView : UserControl
     {
-        public HomeView()
+        public HeaderView()
         {
             InitializeComponent();
         }
 
-        public HomeViewModel HomeViewModel
+        public ViewModels.HeaderViewModel HeaderViewModel
         {
             get => default;
             set

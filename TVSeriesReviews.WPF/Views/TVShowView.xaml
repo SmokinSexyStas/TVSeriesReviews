@@ -8,7 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <Button Content="Home" Command="{Binding NavigateHomeCommand}" Width="50" HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding TVShow.Title}" FontSize="20" FontWeight="Bold"/>
         <TextBlock>
             <Run Text="Rate "/>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,22 @@ namespace TVSeriesReviews.WPF.Models.Data
 {
     public static class DataWorker
     {
+        public static ViewModels.HomeViewModel HomeViewModel
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public static TVSeriesReviewsContext TVSeriesReviewsContext
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public static TVShow GetCompleteTVShow(int id)
         {
             using (TVSeriesReviewsContext db = new TVSeriesReviewsContext())
@@ -35,7 +50,19 @@ namespace TVSeriesReviews.WPF.Models.Data
         {
             using (TVSeriesReviewsContext db = new TVSeriesReviewsContext())
             {
-                return db.Users.Any(u => u.Login == user.Login && u.Password == user.Password);
+                User? dbUser = db.Users?.FirstOrDefault(u => u.Login == user.Login);
+                if (dbUser != null)
+                {
+                    byte[] salt = Convert.FromBase64String(dbUser.Salt);
+
+                    bool isPasswordValid = Security.VerifyPassword(user.Password, dbUser.Password, salt);
+
+                    return isPasswordValid;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -101,9 +128,20 @@ namespace TVSeriesReviews.WPF.Models.Data
         {
             using (TVSeriesReviewsContext db = new TVSeriesReviewsContext())
             {
-                db.Users.Add(user);
-                int savedRecords = db.SaveChanges();
-                return savedRecords > 0;
+                if (db.Users.Any(u => u.Login == user.Login))
+                {
+                    return false;
+                }
+                else
+                {
+                    byte[] salt;
+                    user.Password = Security.HashPassword(user.Password, out salt);
+                    user.Salt = Convert.ToBase64String(salt);
+
+                    db.Users.Add(user);
+                    int savedRecords = db.SaveChanges();
+                    return savedRecords > 0;
+                }
             }
         }
 
@@ -133,19 +171,23 @@ namespace TVSeriesReviews.WPF.Models.Data
             return result;
         }
 
-        public static string DeleteUser(User user)
+        public static bool DeleteUser(User user)
         {
-            string result = "Delete fail";
             using (TVSeriesReviewsContext db = new TVSeriesReviewsContext())
             {
-                if (user != null)
+                User? u = db.Users.FirstOrDefault(u => u.Login == user.Login);
+                if (u != null)
                 {
-                    db.Users.Remove(user);
+                    db.Users.Remove(u);
                     db.SaveChanges();
-                    result = "Successfully deleted";
+
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return result;
         }
 
 

@@ -5,12 +5,7 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSeriesReviews.WPF", "TVSeriesReviews.WPF\TVSeriesReviews.WPF.csproj", "{33D03749-C73E-4209-84E8-195765DDABA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{82935D57-8EDB-41B4-97AE-2F8023EC80B5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{33D03749-C73E-4209-84E8-195765DDABA9} = {33D03749-C73E-4209-84E8-195765DDABA9}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{788884F5-55E3-455C-97C1-0CB08440E15D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{788884F5-55E3-455C-97C1-0CB08440E15D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{33D03749-C73E-4209-84E8-195765DDABA9} = {33D03749-C73E-4209-84E8-195765DDABA9}
 	EndProjectSection
@@ -25,10 +20,6 @@ Global
 		{33D03749-C73E-4209-84E8-195765DDABA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D03749-C73E-4209-84E8-195765DDABA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D03749-C73E-4209-84E8-195765DDABA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82935D57-8EDB-41B4-97AE-2F8023EC80B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82935D57-8EDB-41B4-97AE-2F8023EC80B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82935D57-8EDB-41B4-97AE-2F8023EC80B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82935D57-8EDB-41B4-97AE-2F8023EC80B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{788884F5-55E3-455C-97C1-0CB08440E15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{788884F5-55E3-455C-97C1-0CB08440E15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{788884F5-55E3-455C-97C1-0CB08440E15D}.Release|Any CPU.ActiveCfg = Release|Any CPU

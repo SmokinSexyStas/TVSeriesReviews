@@ -1,21 +1,19 @@
-﻿using System;
+﻿using DryIoc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using TVSeriesReviews.WPF.Models;
 using TVSeriesReviews.WPF.Models.Data;
-using TVSeriesReviews.WPF.Services;
 using TVSeriesReviews.WPF.Views;
 
 namespace TVSeriesReviews.WPF.ViewModels
 {
-    public class AuthorizationViewModel : BindableBase, INavigationAware
+    public class RegistrationViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly IUserSessionService _userSessionService;
         private User? _user;
         public User? User { get { return _user; } set { _user = value; } }
         private string _errorMessage;
@@ -36,47 +34,47 @@ namespace TVSeriesReviews.WPF.ViewModels
             get { return _password; }
             set { SetProperty(ref _password, value); }
         }
-        public DelegateCommand AuthorizeUserCommand {  get; set; }
-        public DelegateCommand NavigateRegistrationCommand { get; set; }
 
-        public AuthorizationViewModel(IRegionManager regionManager, IUserSessionService userSessionService)
+        public DelegateCommand RegistrationCommand { get; set; }
+
+        public RegistrationViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _userSessionService = userSessionService;
             _login = string.Empty;
             _password = string.Empty;
             _errorMessage = string.Empty;
 
-            AuthorizeUserCommand = new DelegateCommand(AuthorizeUser);
-            NavigateRegistrationCommand = new DelegateCommand(NavigateRegistration);
+            RegistrationCommand = new DelegateCommand(Registration);
         }
 
-
-        private void AuthorizeUser()
+        private void Registration()
         {
-            _user = new User { Login = _login, Password = _password };
-            if (DataWorker.IsUserExists(_user))
+            if (_password == string.Empty || _login == string.Empty)
             {
-                ErrorMessage = string.Empty;
-
-                _userSessionService.UpdateUser(_user);
-
-                _regionManager.RequestNavigate("ContentRegion", nameof(HomeView), AuthorizationComplete);
+                ErrorMessage = "All fields must be filled";
+            }
+            else if (_password.Length < 8)
+            {
+                ErrorMessage = "Password shuld be at least 8 characters long";
             }
             else
             {
-                ErrorMessage = "Authorization error";
+                _user = new User() { Login = _login, Password = _password };
+                if (DataWorker.CreateUser(_user))
+                {
+                    _regionManager.RequestNavigate("ContentRegion", nameof(AuthorizationView), RegistrationComplete);
+                }
+                else
+                {
+                    ErrorMessage = "User with this login already exists";
+                }
             }
+
         }
 
-        private void AuthorizationComplete(NavigationResult navigationResult)
+        private void RegistrationComplete(NavigationResult result)
         {
-            MessageBox.Show($"Welcome {Login}", "Authorization Complete", MessageBoxButton.OK);
-        }
-
-        private void NavigateRegistration()
-        {
-            _regionManager.RequestNavigate("ContentRegion", nameof(RegistrationView));
+            MessageBox.Show($"Success", "Registration succeeded", MessageBoxButton.OK);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -89,14 +87,6 @@ namespace TVSeriesReviews.WPF.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             
-        }
-
-        public IUserSessionService IUserSessionService
-        {
-            get => default;
-            set
-            {
-            }
         }
     }
 }

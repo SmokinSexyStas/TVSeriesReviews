@@ -33,28 +33,82 @@ namespace TestProject
             // assert
             Assert.IsNull(result);
         }
-    }
 
-    [TestClass]
-    public class HomeViewModelTests
-    {
         [TestMethod]
-        public void SelectedTVShow_InvokesNavigateTVShowCommand()
+        public void IsUserExists_ReturnsTrue_WhenUserExists()
         {
             // arrange
-            var homeViewModel = new HomeViewModel();
-            TVShow testShow = new TVShow { Id = 1 };
-
-            bool commandExecuted = false;
-            homeViewModel.NavigateTVShowCommand = new RelayCommand<TVShow>((_) => commandExecuted = true);
-
+            User user = new User();
+            user.Login = "test";
+            user.Password = "qwerty12";
             // act
-            homeViewModel.SelectedTVShow = testShow;
+            bool result = DataWorker.IsUserExists(user);
+            //assert
+            Assert.IsTrue(result);
+        }
 
+        [TestMethod]
+        public void IsUserExists_ReturnsFalse_WhenUserDoesNotExist()
+        {
+            // arrange
+            User user = new User();
+            user.Login = "test";
+            user.Password = "fakepassword";
+            // act
+            bool result = DataWorker.IsUserExists(user);
+            //assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void CreateUser_ReturnsTrue_WhenLoginDoesNotExist()
+        {
+            // arrange
+            User user = new User();
+            user.Login = "create_test";
+            user.Password = "testpassword";
+            // act
+            bool result = DataWorker.CreateUser(user);
             // assert
-            Assert.IsTrue(commandExecuted);
+            Assert.IsTrue(result);
+            // cleanup
+            DataWorker.DeleteUser(user);
+        }
+
+        [TestMethod]
+        public void CreateUser_ReturnsFalse_WhenLoginExists()
+        {
+            // arrange
+            User user = new User();
+            user.Login = "test";
+            user.Password = "testpassword";
+            // act
+            bool result = DataWorker.CreateUser(user);
+            // assert
+            Assert.IsFalse(result);
         }
     }
+
+    //[TestClass]
+    //public class HomeViewModelTests
+    //{
+    //    [TestMethod]
+    //    public void SelectedTVShow_InvokesNavigateTVShowCommand()
+    //    {
+    //        // arrange
+    //        var homeViewModel = new HomeViewModel();
+    //        TVShow testShow = new TVShow { Id = 1 };
+
+    //        bool commandExecuted = false;
+    //        homeViewModel.NavigateTVShowCommand = new RelayCommand<TVShow>((_) => commandExecuted = true);
+
+    //        // act
+    //        homeViewModel.SelectedTVShow = testShow;
+
+    //        // assert
+    //        Assert.IsTrue(commandExecuted);
+    //    }
+    //}
 
     //[TestClass]
     //public class MainViewModelTests

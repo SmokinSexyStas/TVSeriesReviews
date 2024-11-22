@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TVSeriesReviews.WPF.Models.Data;
@@ -11,9 +12,11 @@ using TVSeriesReviews.WPF.Models.Data;
 namespace TVSeriesReviews.WPF.Migrations
 {
     [DbContext(typeof(TVSeriesReviewsContext))]
-    partial class TVSeriesReviewsContextModelSnapshot : ModelSnapshot
+    [Migration("20241118110710_Salt")]
+    partial class Salt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +38,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors", (string)null);
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Director", b =>
@@ -51,7 +54,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Directors", (string)null);
+                    b.ToTable("Directors");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Episode", b =>
@@ -78,7 +81,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("SeasonId");
 
-                    b.ToTable("Episodes", (string)null);
+                    b.ToTable("Episodes");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Genre", b =>
@@ -94,7 +97,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Review", b =>
@@ -126,7 +129,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.ReviewLike", b =>
@@ -152,7 +155,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ReviewLikes", (string)null);
+                    b.ToTable("ReviewLikes");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Season", b =>
@@ -173,7 +176,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("TVShowId");
 
-                    b.ToTable("Seasons", (string)null);
+                    b.ToTable("Seasons");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.TVShow", b =>
@@ -195,7 +198,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TVShows", (string)null);
+                    b.ToTable("TVShows");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.TVShowActor", b =>
@@ -218,7 +221,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("TVShowId");
 
-                    b.ToTable("TVShowActors", (string)null);
+                    b.ToTable("TVShowActors");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.TVShowDirector", b =>
@@ -241,7 +244,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("TVShowId");
 
-                    b.ToTable("TVShowDirectors", (string)null);
+                    b.ToTable("TVShowDirectors");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.TVShowGenre", b =>
@@ -264,7 +267,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("TVShowId");
 
-                    b.ToTable("TVShowGenres", (string)null);
+                    b.ToTable("TVShowGenres");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.User", b =>
@@ -290,12 +293,12 @@ namespace TVSeriesReviews.WPF.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("Salt")
-                        .HasColumnType("bytea");
+                    b.Property<string>("Salt")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.UserTVShow", b =>
@@ -318,7 +321,7 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserTVShows", (string)null);
+                    b.ToTable("UserTVShows");
                 });
 
             modelBuilder.Entity("TVSeriesReviews.WPF.Models.Episode", b =>

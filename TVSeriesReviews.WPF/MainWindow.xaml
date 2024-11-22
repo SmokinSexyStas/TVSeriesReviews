@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:TVSeriesReviews.WPF"
         xmlns:viewmodels="clr-namespace:TVSeriesReviews.WPF.ViewModels"
         xmlns:views="clr-namespace:TVSeriesReviews.WPF.Views"
+        xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="TV Series Reviews" Height="450" Width="800">
-    <Grid>
-        <ContentControl Content="{Binding CurrentView}" />
-    </Grid>
+    <DockPanel>
+        <ContentControl prism:RegionManager.RegionName="HeaderRegion" DockPanel.Dock="Top"/>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
+    </DockPanel>
 </Window>

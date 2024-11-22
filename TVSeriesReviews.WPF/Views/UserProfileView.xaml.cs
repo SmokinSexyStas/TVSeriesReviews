@@ -12,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TVSeriesReviews.WPF.ViewModels;
 
 namespace TVSeriesReviews.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for UserProfileView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class UserProfileView : UserControl
     {
-        public HomeView()
+        public UserProfileView()
         {
             InitializeComponent();
-        }
-
-        public HomeViewModel HomeViewModel
-        {
-            get => default;
-            set
-            {
-            }
         }
     }
 }

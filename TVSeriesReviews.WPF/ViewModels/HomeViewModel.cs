@@ -11,13 +11,13 @@ using TVSeriesReviews.WPF.Models;
 using TVSeriesReviews.WPF.Models.Data;
 using TVSeriesReviews.WPF.Views;
 using TVSeriesReviews.WPF.ViewModels;
-using System.Data.Entity;
 
 
 namespace TVSeriesReviews.WPF.ViewModels
 {
-    public class HomeViewModel : ViewModelBase
+    public class HomeViewModel : BindableBase
     {
+        private readonly IRegionManager _regionManager;
         public ObservableCollection<TVShow> TVShows { get; set; }
         public ObservableCollection<Genre> genres { get; set; } = new ObservableCollection<Genre>();
         private TVShow? _selectedTVShow;
@@ -27,28 +27,43 @@ namespace TVSeriesReviews.WPF.ViewModels
             set
             {
                 _selectedTVShow = value;
-                OnPropertyChanged(nameof(SelectedTVShow));
+                SetProperty(ref _selectedTVShow, value);
 
-                NavigateTVShowCommand.Execute(value);
+                NavigateTVShowCommand.Execute(_selectedTVShow);
             }
         }
 
-        public ICommand NavigateTVShowCommand { get; set; }
+        public DelegateCommand<TVShow> NavigateTVShowCommand { get; set; }
 
-        public HomeViewModel()
+        public HomeViewModel(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
+
             var shows = DataWorker.GetAllTVShows();
             TVShows = new ObservableCollection<TVShow>(shows);
 
             _selectedTVShow = null;
 
-            NavigateTVShowCommand = new RelayCommand<TVShow>(NavigateTVShow);
+            NavigateTVShowCommand = new DelegateCommand<TVShow>(NavigateTVShow);
         }
 
-        private void NavigateTVShow(TVShow selectedShow)
-        { 
-            var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-            mainViewModel?.NavigateTVShow(selectedShow);
+
+        private void NavigateTVShow(TVShow tvShow)
+        {
+            TVShow show = DataWorker.GetCompleteTVShow(tvShow.Id);
+            if (show != null)
+            {
+                var parameter = new NavigationParameters();
+                parameter.Add("TVShow", show);
+                _regionManager.RequestNavigate("ContentRegion", nameof(TVShowView), parameter);
+            }
+            else
+            {
+                var parameter = new NavigationParameters();
+                parameter.Add("Message", "TV show was not found");
+                _regionManager.RequestNavigate("ContentRegion", nameof(ErrorView), parameter);
+            }
         }
+
     }
 }

@@ -24,8 +24,14 @@ namespace TVSeriesReviews.WPF.Views
         public AuthorizationView()
         {
             InitializeComponent();
+        }
 
-            DataContext = new AuthorizationViewModel();
+        public AuthorizationViewModel AuthorizationViewModel
+        {
+            get => default;
+            set
+            {
+            }
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)

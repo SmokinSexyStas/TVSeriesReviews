@@ -17,20 +17,28 @@ using TVSeriesReviews.WPF.ViewModels;
 namespace TVSeriesReviews.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for RegistrationView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class RegistrationView : UserControl
     {
-        public HomeView()
+        public RegistrationView()
         {
             InitializeComponent();
         }
 
-        public HomeViewModel HomeViewModel
+        public RegistrationViewModel RegistrationViewModel
         {
             get => default;
             set
             {
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RegistrationViewModel viewModel)
+            {
+                viewModel.Password = ((PasswordBox)sender).Password;
             }
         }
     }

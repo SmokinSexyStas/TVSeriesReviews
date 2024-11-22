@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="ViewModels">
+    <Position X="6.684" Y="0.72" Height="0.291" Width="1.27" />
+  </Comment>
+  <Comment CommentText="Views">
+    <Position X="1.717" Y="0.798" Height="0.291" Width="1.006" />
+  </Comment>
+  <Comment CommentText="Models.Data">
+    <Position X="11.258" Y="1.26" Height="0.291" Width="0.995" />
+  </Comment>
+  <Comment CommentText="Services">
+    <Position X="6.943" Y="6.59" Height="0.291" Width="0.942" />
+  </Comment>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.ErrorViewModel" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAACQAAAAAAAQAQAABQAAAEAA=</HashCode>
+      <FileName>ViewModels\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.HeaderViewModel" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECBBAAIAAAQAAQAAAAAAAAAAIAAAAIAAAAAAAAAAEAA=</HashCode>
+      <FileName>ViewModels\HeaderViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IUserSessionService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.HomeViewModel" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAEAQAAQASAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.TVShowViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAADAAAAAAgQAAAAIAAAQAAAAAAAQAAAAAQAAAAAA=</HashCode>
+      <FileName>ViewModels\TVShowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Models.Data.DataWorker" Collapsed="true">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAgAABAAAQBAAAAEgAAAAAAAIQAIgAACAAACAAEAAAA=</HashCode>
+      <FileName>Models\Data\DataWorker.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HomeViewModel" />
+      <Property Name="TVSeriesReviewsContext" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Models.Data.TVSeriesReviewsContext">
+    <Position X="11" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAHIAASAAgAAAAAcAAAABAKAAAAAAAAAgAABAAAA=</HashCode>
+      <FileName>Models\Data\TVSeriesReviewsContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.ErrorView" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <AssociationLine Name="ErrorViewModel" Type="TVSeriesReviews.WPF.ViewModels.ErrorViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="4.366" />
+        <Point X="5.042" Y="4.366" Type="JumpStart" />
+        <Point X="5.208" Y="4.366" Type="JumpEnd" />
+        <Point X="8.25" Y="4.366" />
+        <Point X="8.25" Y="3.941" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.143" Y="0.192" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ErrorView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ErrorViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.HeaderView" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HeaderView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HeaderViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.HomeView" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <AssociationLine Name="HomeViewModel" Type="TVSeriesReviews.WPF.ViewModels.HomeViewModel" ManuallyRouted="true">
+      <Path>
+        <Point X="2" Y="2.366" />
+        <Point X="2.25" Y="2.366" />
+        <Point X="2.25" Y="1.203" />
+        <Point X="8.25" Y="1.203" />
+        <Point X="8.25" Y="1.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.082" Y="0.33" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HomeView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HomeViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.TVShowView" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\TVShowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TVShowViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.RegistrationView">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\RegistrationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RegistrationViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Views.AuthorizationView">
+    <Position X="2.5" Y="5.75" Width="1.5" />
+    <AssociationLine Name="AuthorizationViewModel" Type="TVSeriesReviews.WPF.ViewModels.AuthorizationViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="6.188" />
+        <Point X="5.042" Y="6.187" Type="JumpStart" />
+        <Point X="5.208" Y="6.188" Type="JumpEnd" />
+        <Point X="8.25" Y="6.188" />
+        <Point X="8.25" Y="5.691" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.168" Y="0.258" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Views\AuthorizationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AuthorizationViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.232" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.AuthorizationViewModel" Collapsed="true">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <AssociationLine Name="IUserSessionService" Type="TVSeriesReviews.WPF.Services.IUserSessionService" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.688" Y="5.691" />
+        <Point X="8.688" Y="7.625" />
+        <Point X="7.5" Y="7.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AWQBAAIAAAIQAQAAAAAIAAQEAAAAAIUCAAAQYAAAAAA=</HashCode>
+      <FileName>ViewModels\AuthorizationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IUserSessionService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.ViewModels.RegistrationViewModel" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQSBAAAAAAAAAQAAAAAAAAQEAAAAAIQCAAAQYAAEAAA=</HashCode>
+      <FileName>ViewModels\RegistrationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TVSeriesReviews.WPF.Services.UserSessionService" Collapsed="true">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAEAAAAAAAQACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\UserSessionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.255" />
+  </Class>
+  <Interface Name="TVSeriesReviews.WPF.Services.IUserSessionService">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAQACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IUserSessionService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
