@@ -13,13 +13,12 @@ namespace TVSeriesReviews.WPF.ViewModels
     {
         private readonly IRegionManager _regionManager;
         private readonly IUserSessionService _userSessionService;
+        private string _searchText;
+        public string? SearchText {  get => _searchText; set { SetProperty(ref _searchText, value); } }
         private string? _userLogin;
-        public string? UserLogin
-        {
-            get => _userLogin;
-            set { SetProperty(ref _userLogin, value); }
-        }
+        public string? UserLogin { get => _userLogin; set { SetProperty(ref _userLogin, value); } }
         private User? _user;
+
         public User? User
         {
             get => _user;
@@ -39,6 +38,7 @@ namespace TVSeriesReviews.WPF.ViewModels
 
         public DelegateCommand NavigateHomeCommand { get; set; }
         public DelegateCommand NavigateAuthorizationOrProfileCommand { get; set; }
+        public DelegateCommand<string> SearchCommand { get; set; }
 
         public HeaderViewModel(IRegionManager regionManager, IUserSessionService userSessionService)
         {
@@ -46,13 +46,20 @@ namespace TVSeriesReviews.WPF.ViewModels
             _userSessionService = userSessionService;
             UserLogin = "Log in";
             User = null;
+            SearchText = String.Empty;
 
             _userSessionService.UserChanged += OnUserChanged;
 
-            NavigateHomeCommand = new DelegateCommand(() => _regionManager.RequestNavigate("ContentRegion", "HomeView"));
+            NavigateHomeCommand = new DelegateCommand(NavigateHome);
             NavigateAuthorizationOrProfileCommand = new DelegateCommand(NavigateAuthorizationOrProfile);
+            SearchCommand = new DelegateCommand<string>(Search);
         }
 
+        private void NavigateHome()
+        {
+            SearchText = String.Empty;
+            _regionManager.RequestNavigate("ContentRegion", "HomeView");
+        }
 
         private void NavigateAuthorizationOrProfile()
         {
@@ -72,12 +79,11 @@ namespace TVSeriesReviews.WPF.ViewModels
             User = user;
         }
 
-        public IUserSessionService IUserSessionService
+        private void Search(string obj)
         {
-            get => default;
-            set
-            {
-            }
+            var parameter = new NavigationParameters();
+            parameter.Add("SearchText", _searchText);
+            _regionManager.RequestNavigate("ContentRegion", nameof(HomeView), parameter);
         }
     }
 }

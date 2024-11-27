@@ -13,6 +13,7 @@ namespace TVSeriesReviews.WPF.Models
         public int Rate { get; set; }
         // Rate for this review
         public int Users_Rate {  get; set; }
+        public DateTimeOffset? DateWritten { get; set; }
         public List<ReviewLike> ReviewLikes { get; } = new List<ReviewLike>();   
 
     }

@@ -26,13 +26,5 @@ namespace TVSeriesReviews.WPF.Views
         {
             InitializeComponent();
         }
-
-        public TVShowViewModel TVShowViewModel
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 }

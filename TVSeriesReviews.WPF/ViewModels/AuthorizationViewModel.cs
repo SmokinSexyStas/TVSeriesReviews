@@ -55,7 +55,8 @@ namespace TVSeriesReviews.WPF.ViewModels
         private void AuthorizeUser()
         {
             _user = new User { Login = _login, Password = _password };
-            if (DataWorker.IsUserExists(_user))
+            _user = DataWorker.GetUser(_user);
+            if (_user != null)
             {
                 ErrorMessage = string.Empty;
 
@@ -89,14 +90,6 @@ namespace TVSeriesReviews.WPF.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             
-        }
-
-        public IUserSessionService IUserSessionService
-        {
-            get => default;
-            set
-            {
-            }
         }
     }
 }

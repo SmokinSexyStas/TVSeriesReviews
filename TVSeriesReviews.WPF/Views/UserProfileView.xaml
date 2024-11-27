@@ -6,8 +6,19 @@
              xmlns:local="clr-namespace:TVSeriesReviews.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Login}" FontSize="16" TextAlignment="Center"/>
-        <Button Content="Exit profile" Command="{Binding ExitProfileCommand}" Width="70"/>
+    <StackPanel Background="#3D445E">
+        <TextBlock Text="{Binding Login}" FontSize="16" TextAlignment="Center"
+                   Foreground="#FFFFFF"
+                   FontFamily="Inter"
+                   Margin="0 20"/>
+        <Button Content="Exit profile"
+                Command="{Binding ExitProfileCommand}"
+                Width="100"
+                Cursor="Hand"
+                Background="#5A627F"
+                Foreground="#FFFFFF"
+                FontFamily="Inter"
+                FontSize="14"
+                BorderThickness="0"/>
     </StackPanel>
 </UserControl>

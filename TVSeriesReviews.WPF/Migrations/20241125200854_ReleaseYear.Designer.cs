@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TVSeriesReviews.WPF.Models.Data;
@@ -11,9 +12,11 @@ using TVSeriesReviews.WPF.Models.Data;
 namespace TVSeriesReviews.WPF.Migrations
 {
     [DbContext(typeof(TVSeriesReviewsContext))]
-    partial class TVSeriesReviewsContextModelSnapshot : ModelSnapshot
+    [Migration("20241125200854_ReleaseYear")]
+    partial class ReleaseYear
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,9 +107,6 @@ namespace TVSeriesReviews.WPF.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset?>("DateWritten")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
@@ -298,9 +298,6 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
-
-                    b.Property<DateTimeOffset?>("RegistrationDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Salt")
                         .HasColumnType("text");

@@ -7,25 +7,157 @@
              xmlns:local="clr-namespace:TVSeriesReviews.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding TVShow.Title}" FontSize="20" FontWeight="Bold"/>
-        <TextBlock>
-            <Run Text="Rate "/>
-            <Run Text="{Binding TVShow.Rate, Mode=OneWay}"/>
-        </TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Directed by " />
-            <TextBlock Text="{Binding Directors}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Genres: " />
-            <TextBlock Text="{Binding Genres}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Actors: " />
-            <TextBlock Text="{Binding Actors}" />
-        </StackPanel>
-        <TextBlock Text="Description" Margin="0,10,0,0"/>
-        <TextBlock Text="{Binding TVShow.Description}"/>
-    </StackPanel>
+    <ScrollViewer Background="#3D445E">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="0 40 30 0">
+                <Image Source="{Binding PosterPath}"
+                       Height="300"/>
+                <TextBlock HorizontalAlignment="Center">
+                    <Run Text="Rate " FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+                    <Run Text="{Binding TVShow.Rate, Mode=OneWay}" FontSize="16" Foreground="#D1D8E2" FontWeight="Bold" FontFamily="Inter"/>
+                </TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left"
+                        Margin="0 40 0 0">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                    <TextBlock Text="{Binding TVShow.Title}" FontSize="24" FontWeight="Bold" Foreground="#D1D8E2" FontFamily="Inter"/>
+                    <TextBlock Text="{Binding TVShow.ReleaseYear}"  Margin="10 0 0 0" FontSize="12" Foreground="#D1D8E2" VerticalAlignment="Center" FontFamily="Inter"/>
+                </StackPanel>
+                <DockPanel LastChildFill="True" Margin="0 0 0 10">
+                    <TextBlock Text="Directed by " FontSize="16" Foreground="#D1D8E2" FontWeight="DemiBold" FontFamily="Inter"/>
+                    <TextBlock Text="{Binding Directors}" TextWrapping="WrapWithOverflow" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+                </DockPanel>
+                <DockPanel LastChildFill="True" Margin="0 0 0 10">
+                    <TextBlock Text="Genres: " FontSize="16" Foreground="#D1D8E2" FontWeight="DemiBold" FontFamily="Inter"/>
+                    <TextBlock Text="{Binding Genres}" TextWrapping="WrapWithOverflow" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+                </DockPanel>
+                <DockPanel LastChildFill="True" Margin="0 0 0 20">
+                    <TextBlock Text="Actors: " DockPanel.Dock="Left" FontSize="16" Foreground="#D1D8E2" FontWeight="DemiBold" FontFamily="Inter"/>
+                    <TextBlock Text="{Binding Actors}" TextWrapping="WrapWithOverflow" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+                </DockPanel>
+                <TextBlock Text="Description" Margin="0,10,0,0" FontSize="16" Foreground="#D1D8E2" FontWeight="DemiBold" FontFamily="Inter"/>
+                <TextBlock Text="{Binding TVShow.Description}" TextWrapping="WrapWithOverflow" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2">
+                <Label Content="Reviews"
+                       FontSize="20"
+                       HorizontalAlignment="Left"
+                       Foreground="#D1D8E2"
+                       FontFamily="Inter"/>
+                <!-- line -->
+                <Rectangle Height="2"
+                           Fill="#D1D8E2"
+                           Margin="0,10,0,10"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+                        Grid.Row="2">
+                <Label Content="Write a review:" Width="400" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter"/>
+                <TextBox Text="{Binding UserReview}"
+                         Width="400"
+                         Height="100"
+                         TextWrapping="Wrap"
+                         MaxLength="2000"
+                         FontSize="14"
+                         AcceptsReturn="True"
+                         FontFamily="Inter"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Slider Value="{Binding UserRate}"
+                            SmallChange="1"
+                            Minimum="0"
+                            Maximum="10"
+                            TickPlacement="BottomRight"
+                            IsSnapToTickEnabled="True"
+                            Width="300"
+                            Margin="0 20"
+                            Cursor="Hand"/>
+                    <Label Content="{Binding UserRate}" Margin="10 0 0 0" FontSize="16" Foreground="#D1D8E2" FontFamily="Inter" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Button Content="Publish review"
+                        Command="{Binding PublishReviewCommand}"
+                        Width="100"
+                        Height="22"
+                        Cursor="Hand"
+                        Background="#5A627F"
+                        Foreground="#FFFFFF"
+                        FontFamily="Inter"
+                        FontSize="14"
+                        BorderThickness="0"/>
+            </StackPanel>
+        
+            <!-- Reviews -->
+            <ItemsControl Grid.Column="2"
+                          Grid.Row="3"
+                          ItemsSource="{Binding Reviews}"
+                          Margin="0 20 0 0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="#D1D8E2" Padding="10" Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Автор і оцінка автора -->
+                                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding User.Login}" FontWeight="Bold" FontSize="14" Foreground="#D1D8E2" FontFamily="Inter"/>
+                                    <TextBlock Text=" - " FontSize="14" Foreground="#D1D8E2" FontFamily="Inter"/>
+                                    <TextBlock Text="{Binding Rate}" FontSize="14" Foreground="#D1D8E2" FontFamily="Inter"/>
+                                    <TextBlock Text="{Binding DateWritten}" Margin="15 0 0 0" FontSize="12" Foreground="#D1D8E2" FontFamily="Inter"/>
+                                </StackPanel>
+
+                                <!-- Оцінка рецензії -->
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding UsersRate}" HorizontalAlignment="Right" FontSize="14" Foreground="#D1D8E2" FontFamily="Inter"/>
+
+                                <!-- Текст рецензії -->
+                                <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                           Text="{Binding Text}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,5,0,5"
+                                           FontSize="14" Foreground="#D1D8E2" FontFamily="Inter"
+                                           />
+
+                                <!-- Кнопки для голосування -->
+                                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="+" Background="Transparent" BorderThickness="0" FontSize="20" Foreground="#D1D8E2" FontFamily="Inter" Cursor="Hand"
+                                            Command="{Binding DataContext.UpvoteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Width="30" Margin="5,0"/>
+                                    <Button Content="-" Background="Transparent" BorderThickness="0" FontSize="20" Foreground="#D1D8E2" FontFamily="Inter" Cursor="Hand"
+                                            Command="{Binding DataContext.DownvoteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Width="30" Margin="5,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

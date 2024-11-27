@@ -7,8 +7,7 @@
              xmlns:vm="clr-namespace:TVSeriesReviews.WPF.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Button Content="Home" Command="{Binding NavigateHomeCommand}" Width="50" HorizontalAlignment="Left"/>
-        <TextBlock Text="{Binding ErrorText}" FontSize="24"/>
+    <StackPanel Background="#3D445E">
+        <TextBlock Text="{Binding ErrorText}" FontSize="26" FontFamily="Inter" Foreground="#D1D8E2" Margin="20"/>
     </StackPanel>
 </UserControl>

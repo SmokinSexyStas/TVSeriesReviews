@@ -8,7 +8,9 @@
         xmlns:views="clr-namespace:TVSeriesReviews.WPF.Views"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="TV Series Reviews" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        MinHeight="530" MinWidth="630"
+        Title="TV Series Reviews" Height="550" Width="850">
     <DockPanel>
         <ContentControl prism:RegionManager.RegionName="HeaderRegion" DockPanel.Dock="Top"/>
         <ContentControl prism:RegionManager.RegionName="ContentRegion"/>

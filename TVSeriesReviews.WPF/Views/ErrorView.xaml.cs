@@ -25,13 +25,5 @@ namespace TVSeriesReviews.WPF.Views
         {
             InitializeComponent();
         }
-
-        internal ErrorViewModel ErrorViewModel
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 }

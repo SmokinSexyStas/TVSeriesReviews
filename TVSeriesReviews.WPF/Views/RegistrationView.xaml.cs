@@ -26,14 +26,6 @@ namespace TVSeriesReviews.WPF.Views
             InitializeComponent();
         }
 
-        public RegistrationViewModel RegistrationViewModel
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is RegistrationViewModel viewModel)

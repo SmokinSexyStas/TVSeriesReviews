@@ -59,7 +59,7 @@ namespace TVSeriesReviews.WPF.ViewModels
             }
             else
             {
-                _user = new User() { Login = _login, Password = _password };
+                _user = new User() { Login = _login, Password = _password, RegistrationDate = DateTimeOffset.UtcNow };
                 if (DataWorker.CreateUser(_user))
                 {
                     _regionManager.RequestNavigate("ContentRegion", nameof(AuthorizationView), RegistrationComplete);

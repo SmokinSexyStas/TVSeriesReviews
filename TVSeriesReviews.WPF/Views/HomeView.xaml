@@ -7,16 +7,122 @@
              xmlns:vm="clr-namespace:TVSeriesReviews.WPF.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <ListBox ItemsSource="{Binding TVShows}" 
-                 SelectedItem="{Binding SelectedTVShow, Mode=TwoWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </StackPanel>
+    <Grid Background="#3D445E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" Margin="5">
+            <!-- Сортування -->
+            <Label Content="Sort"
+                   Margin="15 0"
+                   FontFamily="Inter" 
+                   FontSize="14"
+                   Foreground="#D1D8E2"/>
+            <ComboBox Width="160" 
+                      ItemsSource="{Binding SortingOptions}" 
+                      SelectedItem="{Binding SelectedSortingOption}" 
+                      Margin="0 0 0 20" 
+                      Height="22"
+                      FontFamily="Inter"
+                      FontSize="14">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   FontFamily="Inter"
+                                   FontSize="14"
+                                   />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
+            <!-- Режисер -->
+            <Label Content="Director"
+                   Margin="15 0"
+                   FontFamily="Inter" 
+                   FontSize="14"
+                   Foreground="#D1D8E2"/>
+            <TextBox Width="160" 
+                     Text="{Binding DirectorName}" 
+                     Margin="0 0 0 20" 
+                     Height="22"
+                     VerticalAlignment="Center"
+                     Background="#28294B"
+                     Foreground="#D1D8E2"
+                     FontFamily="Inter"
+                     FontSize="16"
+                     BorderThickness="0"
+                     MaxLength="50"/>
+
+            <!-- Жанри -->
+            <Label Content="Genres"
+                   Margin="15 0"
+                   FontFamily="Inter" 
+                   FontSize="14"
+                   Foreground="#D1D8E2"/>
+            <ListBox Width="160"
+                     ItemsSource="{Binding Genres}"
+                     DisplayMemberPath="Name"
+                     SelectionMode="Multiple"
+                     SelectionChanged="ListBox_SelectionChanged"
+                     Background="#28294B"
+                     Foreground="#D1D8E2"
+                     FontFamily="Inter"
+                     FontSize="16"
+                     BorderThickness="0"/>
+
+            <!-- Кнопка -->
+            <Button Command="{Binding ApplyFiltersCommand}" 
+                    Content="Apply Filters" 
+                    Width="90" 
+                    Height="24" 
+                    Margin="0 15"
+                    Background="#5A627F"
+                    Foreground="#FFFFFF"
+                    FontFamily="Inter"
+                    FontSize="14"
+                    BorderThickness="0"/>
+        </StackPanel>
+
+        <Label Content="{Binding SearchResultText}"
+               Grid.Column="1"
+               Foreground="#D1D8E2"/>
+        <ScrollViewer Grid.Column="1" Margin="5">
+            <ItemsControl ItemsSource="{Binding TVShows}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.NavigateTVShowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"
+                                Margin="20"
+                                BorderThickness="0"
+                                Background="#3D445E"
+                                Cursor="Hand">
+                            <Border Width="150" Height="200">
+                                <StackPanel>
+                                    <Image Source="{Binding PosterPath}" 
+                                           Height="170" 
+                                           Stretch="Uniform"/>
+
+                                    <TextBlock Text="{Binding Title}" 
+                                               FontWeight="Bold" 
+                                               HorizontalAlignment="Center" 
+                                               TextAlignment="Center" 
+                                               TextWrapping="Wrap"
+                                               FontFamily="Inter"
+                                               FontSize="14"
+                                               Foreground="#D1D8E2"/>
+                                </StackPanel>
+                            </Border>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

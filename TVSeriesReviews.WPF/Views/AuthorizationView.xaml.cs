@@ -26,14 +26,6 @@ namespace TVSeriesReviews.WPF.Views
             InitializeComponent();
         }
 
-        public AuthorizationViewModel AuthorizationViewModel
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is AuthorizationViewModel viewModel)

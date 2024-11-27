@@ -12,8 +12,8 @@ using TVSeriesReviews.WPF.Models.Data;
 namespace TVSeriesReviews.WPF.Migrations
 {
     [DbContext(typeof(TVSeriesReviewsContext))]
-    [Migration("20241118110900_byte_salt")]
-    partial class byte_salt
+    [Migration("20241127072923_DateTime")]
+    partial class DateTime
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,9 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTimeOffset?>("DateWritten")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
 
@@ -192,6 +195,12 @@ namespace TVSeriesReviews.WPF.Migrations
 
                     b.Property<string>("PosterPath")
                         .HasColumnType("text");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("ReleaseYear")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -293,8 +302,11 @@ namespace TVSeriesReviews.WPF.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("Salt")
-                        .HasColumnType("bytea");
+                    b.Property<DateTimeOffset?>("RegistrationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

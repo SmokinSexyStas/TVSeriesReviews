@@ -15,11 +15,17 @@ using TVSeriesReviews.WPF.ViewModels;
 
 namespace TVSeriesReviews.WPF.ViewModels
 {
-    public class HomeViewModel : BindableBase
+    public class HomeViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
         public ObservableCollection<TVShow> TVShows { get; set; }
-        public ObservableCollection<Genre> genres { get; set; } = new ObservableCollection<Genre>();
+        public ObservableCollection<Genre> Genres { get; set; }
+        public ObservableCollection<Genre> SelectedGenres { get; set; }
+        public ObservableCollection<string> SortingOptions { get; set; }
+        public string? SearchText { get; set; }
+        public string? SearchResultText { get; set; }
+        public string SelectedSortingOption { get; set; }
+        public string DirectorName { get; set; }
         private TVShow? _selectedTVShow;
         public TVShow? SelectedTVShow
         {
@@ -34,6 +40,7 @@ namespace TVSeriesReviews.WPF.ViewModels
         }
 
         public DelegateCommand<TVShow> NavigateTVShowCommand { get; set; }
+        public DelegateCommand ApplyFiltersCommand { get; set; }
 
         public HomeViewModel(IRegionManager regionManager)
         {
@@ -41,10 +48,29 @@ namespace TVSeriesReviews.WPF.ViewModels
 
             var shows = DataWorker.GetAllTVShows();
             TVShows = new ObservableCollection<TVShow>(shows);
+            var genres = DataWorker.GetAllGenres();
+            Genres = new ObservableCollection<Genre>(genres);
+
+            SortingOptions = new ObservableCollection<string>
+            {
+                "Rating (Ascending)",
+                "Rating (Descending)",
+                "Title (A-Z)",
+                "Title (Z-A)",
+                "Release Year (Ascending)",
+                "Release Year (Descending)"
+            };
+
+            SelectedGenres = new ObservableCollection<Genre>();
+            DirectorName = string.Empty;
+            SelectedSortingOption = SortingOptions[1];
 
             _selectedTVShow = null;
 
             NavigateTVShowCommand = new DelegateCommand<TVShow>(NavigateTVShow);
+            ApplyFiltersCommand = new DelegateCommand(ApplyFilters);
+
+            ApplyFilters();
         }
 
 
@@ -65,5 +91,37 @@ namespace TVSeriesReviews.WPF.ViewModels
             }
         }
 
+        private void ApplyFilters()
+        {
+            List<TVShow> filteredTVShows = DataWorker.GetFilteredTVShows(SearchText, SelectedGenres.ToList(), DirectorName, SelectedSortingOption);
+
+            TVShows.Clear();
+            foreach(TVShow tvShow in filteredTVShows)
+            {
+                TVShows.Add(tvShow);
+            }
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            SearchText = navigationContext.Parameters["SearchText"] as String;
+            if (String.IsNullOrEmpty(SearchText))
+            {
+                SearchText = string.Empty;
+                SearchResultText = string.Empty;
+            }
+            else
+            {
+                SearchResultText = $"Results for \"{SearchText}\"";
+            }
+            ApplyFilters();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
     }
 }

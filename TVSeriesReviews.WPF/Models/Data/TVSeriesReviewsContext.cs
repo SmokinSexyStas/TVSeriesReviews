@@ -30,6 +30,7 @@ namespace TVSeriesReviews.WPF.Models.Data
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(DbPath);
+            => optionsBuilder.UseNpgsql(DbPath).EnableSensitiveDataLogging();
+
     }
 }

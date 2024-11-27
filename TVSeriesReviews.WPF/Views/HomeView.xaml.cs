@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TVSeriesReviews.WPF.Models;
 using TVSeriesReviews.WPF.ViewModels;
 
 namespace TVSeriesReviews.WPF.Views
@@ -26,11 +27,19 @@ namespace TVSeriesReviews.WPF.Views
             InitializeComponent();
         }
 
-        public HomeViewModel HomeViewModel
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            get => default;
-            set
+            if (DataContext is HomeViewModel viewModel)
             {
+                var listBox = sender as ListBox;
+                if (listBox != null)
+                {
+                    viewModel.SelectedGenres.Clear();
+                    foreach (var item in listBox.SelectedItems)
+                    {
+                        viewModel.SelectedGenres.Add(item as Genre);
+                    }
+                }
             }
         }
     }

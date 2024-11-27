@@ -87,6 +87,42 @@ namespace TestProject
             // assert
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void GetFilteredTVShows_FiltersByTitle_IgnoresCase()
+        {
+            // arrange
+
+            // act
+            var result = DataWorker.GetFilteredTVShows("breaking bad", null, null, null);
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Breaking Bad", result[0].Title);
+        }
+
+        [TestMethod]
+        public void GetFilteredTVShows_FiltersByGenres()
+        {
+            // arrange
+            List<Genre> genres = new List<Genre> { new Genre() { Id = 1 }, new Genre { Id = 2 } };
+            // act
+            var result = DataWorker.GetFilteredTVShows(null, genres, null, null);
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() > 0);
+        }
+
+        [TestMethod]
+        public void GetFilteredTVShows_FiltersByDirectorName()
+        {
+            // arrange
+
+            // act 
+            var result = DataWorker.GetFilteredTVShows(null, null, "Lynch", null);
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() > 0);
+        }
     }
 
     //[TestClass]

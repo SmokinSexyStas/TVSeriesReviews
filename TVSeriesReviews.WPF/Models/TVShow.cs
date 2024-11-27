@@ -11,13 +11,8 @@ namespace TVSeriesReviews.WPF.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public decimal Rate
-        {
-            get
-            {
-                return Reviews.Any() ? (decimal)Reviews.Average(review => (double)review.Rate) : 0;
-            }
-        }
+        public decimal Rate {  get; set; }
+        public int? ReleaseYear {  get; set; }
         public string? PosterPath {  get; set; }
         public List<TVShowGenre> TVShowGenres { get; } = new List<TVShowGenre>();
         public List<TVShowDirector> TVShowDirectors { get; } = new List<TVShowDirector>();
